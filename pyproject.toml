@@ -1,0 +1,66 @@
+[project]
+name = "approck-sqlalchemy-query-builder"
+version = "1.0.3"
+description = "Build SQLAlchemy 2 WHERE clauses from nested JSON-friendly filter rules validated with Pydantic."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Aleksey Dalekin", email = "ald@approck.pro" }]
+keywords = ["sqlalchemy", "sqlalchemy-2", "query-builder", "filter", "pydantic", "where"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Database",
+    "Typing :: Typed",
+]
+dependencies = [
+    "sqlalchemy[mypy]>=2.0.0",
+    "pydantic>=2.4.1,<3",
+    "python-dateutil>=2.8.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/approck/approck-sqlalchemy-query-builder"
+Repository = "https://github.com/approck/approck-sqlalchemy-query-builder"
+Changelog = "https://github.com/approck/approck-sqlalchemy-query-builder/releases"
+Issues = "https://github.com/approck/approck-sqlalchemy-query-builder/issues"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.10.0",
+    "pytest>=8.2.1",
+    "ruff>=0.4.5",
+    "types-python-dateutil>=2.8.19",
+]
+
+[build-system]
+requires = ["hatchling>=1.24.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/approck_sqlalchemy_query_builder",
+    "/README.md",
+    "/LICENSE",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["approck_sqlalchemy_query_builder"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.mypy]
+python_version = "3.10"
+strict = false
+warn_return_any = true
+warn_unused_configs = true
+plugins = ["pydantic.mypy", "sqlalchemy.ext.mypy.plugin"]
